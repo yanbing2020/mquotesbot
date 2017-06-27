@@ -18,6 +18,10 @@ DOWNLOAD_DELAY = 0.01
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'
 
+user_agent_list[
+    "tyg"
+]
+
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
@@ -52,9 +56,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html

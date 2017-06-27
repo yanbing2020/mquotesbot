@@ -7,8 +7,9 @@
 import os
 import sys
 import urllib
-import  requests
+import requests
 from quotesbot import settings
+
 
 # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 class FengNiao(object):
