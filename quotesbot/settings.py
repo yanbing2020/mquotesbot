@@ -14,7 +14,7 @@ BOT_NAME = 'quotesbot'
 SPIDER_MODULES = ['quotesbot.spiders']
 NEWSPIDER_MODULE = 'quotesbot.spiders'
 FENGNIAO_STORE = 'E:'
-DOWNLOAD_DELAY = 0.1
+DOWNLOAD_DELAY = 0.01
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'
 
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'quotesbot.pipelines.FengNiao': 300,
+    'quotesbot.pipelines.FengNiao': 1,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

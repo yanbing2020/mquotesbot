@@ -5,15 +5,17 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import os
+import sys
 import urllib
 import  requests
 from quotesbot import settings
 
-
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 class FengNiao(object):
 
     def process_item(self, item, spider):
-        dir_path = '%s/%s' % (settings.FENGNIAO_STORE, spider.name)  # 存储路径
+        main_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # main.py所在文件夹
+        dir_path = '%s/%s' % (main_dir, spider.name)  # 存储路径
         # print 'dir_path',dir_path
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
