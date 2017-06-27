@@ -17,16 +17,12 @@ class FengNiao(object):
         # print 'dir_path',dir_path
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
-        ass = 0
         for key, url_item in item.items():
-            ass += 1
-            # list_name = url_item['url_item']
-            index = url_item.index('?')
-            list_name = url_item
-            file_name = str(ass) + '.jpg'  # 图片名称
-            # print 'filename',file_name
+            list_name = item['url_item']
+            # index = url_item.index('.jpg')
+            # ass = url_item[index-9:index]
+            file_name = item['pic_name'] + '.jpg'  # 图片名称
             file_path = '%s/%s' % (dir_path, file_name)
-            # print 'file_path',file_path
             if os.path.exists(file_name):
                 continue
             with open(file_path, 'ab') as file_writer:

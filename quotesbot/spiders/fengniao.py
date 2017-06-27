@@ -16,10 +16,11 @@ class FengNiao(scrapy.Spider):
         # url = response.xpath('.//div[@class="pic-box"]/@src')
         # url2 = response.xpath('.//div[@class="pic-box"]//@src')
         # imgs = response.xpath('.//div[@class="pic-box"]/img/@src')
-        img = response.xpath('.//div[@class="pic-box"]/img/@src').extract_first()
+        # img = response.xpath('.//div[@class="pic-box"]/img/@src').extract_first()
         # for img in response.xpath('.//div[@class="pic-box"]/img/@src'):
         url_items = FengNiaoUrl()
-        url_items['url_item'] = img
+        url_items['url_item'] = response.xpath('.//div[@class="pic-box"]/img/@src').extract_first()
+        url_items['pic_name'] = response.xpath('.//title/text()').extract_first()
         yield url_items
 
         next_url = response.xpath('.//div[@class="pictureAreaR"]//@next-url').extract_first()

@@ -16,4 +16,5 @@ class QuotesbotItem(scrapy.Item):
 
 class FengNiaoUrl(scrapy.Item):
     url_item = scrapy.Field()
-    pass
+    pic_name = scrapy.Field()
+
