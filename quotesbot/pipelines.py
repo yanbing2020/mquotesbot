@@ -17,6 +17,7 @@ class FengNiao(object):
         # print 'dir_path',dir_path
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
+
         for key, url_item in item.items():
             list_name = item['url_item']
             # index = url_item.index('.jpg')
