@@ -56,15 +56,15 @@ class ScrapyImoocSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class RandomUserAgentMiddleware(object):
-    # 随机更换user-agent
-    def __init__(self, crawler):
-        super(RandomUserAgentMiddleware, self).__init__()
-        self.user_agent_list = crawler.settings.get("user_agent_list", [])
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(crawler)
-
-    def process_request(self, request, spider):
-        request.headers.setdefault('')
+# class RandomUserAgentMiddleware(object):
+#     # 随机更换user-agent
+#     def __init__(self, crawler):
+#         super(RandomUserAgentMiddleware, self).__init__()
+#         self.user_agent_list = crawler.settings.get("user_agent_list", [])
+#
+#     @classmethod
+#     def from_crawler(cls, crawler):
+#         return cls(crawler)
+#
+#     def process_request(self, request, spider):
+#         request.headers.setdefault('')

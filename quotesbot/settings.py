@@ -14,13 +14,9 @@ BOT_NAME = 'quotesbot'
 SPIDER_MODULES = ['quotesbot.spiders']
 NEWSPIDER_MODULE = 'quotesbot.spiders'
 FENGNIAO_STORE = 'E:'
-DOWNLOAD_DELAY = 0.01
+DOWNLOAD_DELAY = 0.1
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'
-
-user_agent_list[
-    "tyg"
-]
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -56,10 +52,14 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
+# DOWNLOADER_MIDDLEWARES = {
+#    'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
+# }
 DOWNLOADER_MIDDLEWARES = {
-   'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
+    'quotesbot.middlewares.middle.RandomUserAgentMiddleware': 543,
+    # 'quotesbot.middlewares.middle.ProcessHeaderMidware': 543,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
-
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -92,3 +92,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586"
+
+USER_AGENT_LIST = [
+                   'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
+                   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'
+                   ]
