@@ -1,6 +1,7 @@
 # encoding: utf-8
 from scrapy.utils.project import get_project_settings
-import random
+from fake_useragent import UserAgent
+# import random
 
 settings = get_project_settings()
 
@@ -19,16 +20,32 @@ class ProcessHeaderMidware(object):
             spider.logger.info(u'User-Agent is : {} {}'.format(request.headers.get('UserAgent-'), request))
         pass
 
+# class RandomUserAgentMiddleware(object):
+#     def __init__(self, crawler):
+#         super(RandomUserAgentMiddleware, self).__init__()
+#         self.user_agent_list = crawler.settings.get("user_agent_list", [])
+#
+#     @classmethod
+#     def from_crawler(cls, crawler):
+#         return cls(crawler)
+#
+#     def process_request(self, request, spider):
+#         ua = random.choice(settings.get('USER_AGENT_LIST'))
+#         request.headers.setdefault('User-Agent', ua)
+
 
 class RandomUserAgentMiddleware(object):
     def __init__(self, crawler):
         super(RandomUserAgentMiddleware, self).__init__()
-        self.user_agent_list = crawler.settings.get("user_agent_list", [])
+        self.ua = UserAgent()
+        self.ua_type = crawler.settings.get("RANDOM_UA_TYPE", "random")
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(crawler)
 
     def process_request(self, request, spider):
-        ua = random.choice(settings.get('USER_AGENT_LIST'))
-        request.headers.setdefault('User-Agent', ua)
+        def get_ua():
+            return getattr(self.ua, self.ua_type)
+        hja = get_ua()
+        request.headers.setdefault('User-Agent', get_ua())
