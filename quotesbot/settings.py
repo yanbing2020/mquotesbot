@@ -8,6 +8,8 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import os
+
 
 BOT_NAME = 'quotesbot'
 
@@ -69,9 +71,14 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'quotesbot.pipelines.FengNiao': 300,
+    # 'quotesbot.pipelines.FengNiao': 300,
     'quotesbot.pipelines.MysqlTwistedPipline': 301,
+    'scrapy.pipelines.images.ImagesPipeline': 240,
+    # 'quotesbot.pipelines.FengNiaoImgPipline': 302,
 }
+IMAGES_URLS_FIELD = "url_item"
+project_dir = os.path.abspath(os.path.dirname(__file__))
+IMAGES_STORE = os.path.join(project_dir, 'images')
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

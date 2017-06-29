@@ -8,6 +8,8 @@ import os
 import sys
 import urllib
 import requests
+from scrapy.contrib.pipeline.images import ImagesPipeline
+
 from quotesbot import settings
 from twisted.enterprise import adbapi
 import MySQLdb
@@ -69,10 +71,8 @@ class MysqlTwistedPipline(object):
 
     def do_insert(self, cursor, item):
         #执行具体的插入
-        insert_sql = """
-                    insert into fengniao(pic_name, pic_url)
-                    VALUES (%s, %s)               
-                """
         #根据不同的item 构建不同的sql语句并插入到mysql中
-        cursor.execute(insert_sql, (item['pic_name'], item['url_item']))
-#hjs
+        insert_sql, params = item.get_insert_sql()
+        print(insert_sql, params)
+        cursor.execute(insert_sql, params)
+
