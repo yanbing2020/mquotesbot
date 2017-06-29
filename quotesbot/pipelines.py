@@ -9,6 +9,9 @@ import sys
 import urllib
 import requests
 from quotesbot import settings
+from twisted.enterprise import adbapi
+import MySQLdb
+import MySQLdb.cursors
 
 
 # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -34,3 +37,42 @@ class FengNiao(object):
                 file_writer.write(conn.content)
             file_writer.close()
         return item
+
+
+class MysqlTwistedPipline(object):
+    def __init__(self, dbpool):
+        self.dbpool = dbpool
+
+    @classmethod
+    def from_settings(cls, settings):
+        dbparms = dict(
+            host=settings["MYSQL_HOST"],
+            db=settings["MYSQL_DBNAME"],
+            user=settings["MYSQL_USER"],
+            passwd=settings["MYSQL_PASSWORD"],
+            charset='utf8',
+            cursorclass=MySQLdb.cursors.DictCursor,
+            use_unicode=True,
+        )
+        dbpool = adbapi.ConnectionPool("MySQLdb", **dbparms)
+
+        return cls(dbpool)
+
+    def process_item(self, item, spider):
+        #使用twisted将mysql插入变成异步执行
+        query = self.dbpool.runInteraction(self.do_insert, item)
+        query.addErrback(self.handle_error, item, spider) #处理异常
+
+    def handle_error(self, failure, item, spider):
+        # 处理异步插入的异常
+        print(failure)
+
+    def do_insert(self, cursor, item):
+        #执行具体的插入
+        insert_sql = """
+                    insert into fengniao(pic_name, pic_url)
+                    VALUES (%s, %s)               
+                """
+        #根据不同的item 构建不同的sql语句并插入到mysql中
+        cursor.execute(insert_sql, (item['pic_name'], item['url_item']))
+
