@@ -75,4 +75,4 @@ class MysqlTwistedPipline(object):
                 """
         #根据不同的item 构建不同的sql语句并插入到mysql中
         cursor.execute(insert_sql, (item['pic_name'], item['url_item']))
-# test gitmerge#2
+
