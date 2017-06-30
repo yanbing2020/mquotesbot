@@ -47,7 +47,7 @@ class GetIP(object):
         """.format(ip)
         cursor.execute(delete_sql)
         conn.commit()
-        return  True
+        return True
 
     def judge_ip(self, ip, port):
         # 是否可用
