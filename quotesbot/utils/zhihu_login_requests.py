@@ -130,7 +130,7 @@ def zhihu_login(account, password):
     response_text = session.post(post_url, data=post_data, headers=header)
     session.cookies.save()
 
-zhihu_login("18021301129", "yinghua123")
-get_index()
+# zhihu_login("18021301129", "yinghua123")
+# get_index()
 is_login()
 
