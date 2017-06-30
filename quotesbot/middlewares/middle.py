@@ -49,3 +49,4 @@ class RandomUserAgentMiddleware(object):
             return getattr(self.ua, self.ua_type)
         hja = get_ua()
         request.headers.setdefault('User-Agent', get_ua())
+        # request.meta["proxy"] = "http://221.238.67.231:8081"
