@@ -57,7 +57,7 @@ class GetIP(object):
             proxy_dict = {
                 "http":proxy_url,
             }
-            response = requests.get(http_url, proxies=proxy_dict)
+            response = requests.get(http_url, proxies=proxy_dict, timeout=3)
         except Exception as e:
             print("invalid ip and port")
             self.delete_ip(ip)
