@@ -4,7 +4,7 @@ from fake_useragent import UserAgent
 # import random
 
 settings = get_project_settings()
-
+from tools.crawler_xici_ip import GetIP
 
 class ProcessHeaderMidware(object):
     # process request add request info
@@ -50,3 +50,10 @@ class RandomUserAgentMiddleware(object):
         hja = get_ua()
         request.headers.setdefault('User-Agent', get_ua())
         # request.meta["proxy"] = "http://221.238.67.231:8081"
+
+
+class RandomProxyMiddleware(object):
+    # 动态设置ip代理
+    def process_request(self, request, spider):
+        get_ip = GetIP()
+        request.meta["proxy"] = get_ip.get_random_ip()

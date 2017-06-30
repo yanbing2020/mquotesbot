@@ -10,10 +10,12 @@ conn = MySQLdb.connect(host="127.0.0.1", user="root", passwd="12345678", db="spi
 cursor = conn.cursor()
 
 def crawler_ips():
-    headers = {"User_Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"}
-    for i in range(1568):
+    headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"}
+    for i in range(1, 1568):
         re = requests.get("http://www.xicidaili.com/nn/{0}".format(i), headers=headers)
-
+        headers
+        url = "http://www.xicidaili.com/nn/{0}".format(i)
+        url_re = requests.get(url)
         selector = Selector(text=re.text)
         all_trs = selector.css("#ip_list tr")
 
@@ -28,11 +30,68 @@ def crawler_ips():
             port = all_texts[1]
             proxy_type = all_texts[5]
 
-            ip_list.append(ip, port, proxy_type, speed)
+            ip_list.append((ip, port, proxy_type, speed))
         for ip_info in ip_list:
-            cursor.excute(
-                "insert proxy_ips(ip, port, speed, proxy_type) VALUES ('{0}', '{1}',{2}, 'HTTP')".format(
+            cursor.execute(
+                "insert ignore proxy_ips(ip, port, speed, proxy_type) VALUES ('{0}', '{1}',{2}, 'HTTP')".format(
                     ip_info[0], ip_info[1], ip_info[3]
                 )
             )
         conn.commit()
+
+
+class GetIP(object):
+    def delete_ip(self,ip):
+        delete_sql = """
+            delete from proxy_ips where ip = '{0}'
+        """.format(ip)
+        cursor.execute(delete_sql)
+        conn.commit()
+        return  True
+
+    def judge_ip(self, ip, port):
+        # 是否可用
+        http_url = "http://www.baidu.com"
+        proxy_url = "https://{0}:{1}".format(ip, port)
+        try:
+            proxy_dict = {
+                "http":proxy_url,
+            }
+            response = requests.get(http_url, proxies=proxy_dict)
+        except Exception as e:
+            print("invalid ip and port")
+            self.delete_ip(ip)
+            return False
+        else:
+            code = response.status_code
+            if code >= 200 and code <300:
+                print("effective ip")
+                return True
+            else:
+                print("invalid ip and port")
+                self.delete_ip(ip)
+                return False
+
+    def get_random_ip(self):
+        # from db 随机取ip
+        random_sql ="""
+              SELECT ip, port FROM proxy_ips
+            ORDER BY RAND()
+            LIMIT 1
+            """
+        result = cursor.execute(random_sql)
+        for ip_info in cursor.fetchall():
+            ip = ip_info[0]
+            port = ip_info[1]
+            judge_re = self.judge_ip(ip, port)
+            if judge_re:
+                return "http://{0}:{1}".format(ip, port)
+            else:
+                return self.get_random_ip()
+
+
+
+if __name__ == '__main__':
+    # crawler_ips()
+    getip = GetIP()
+    getip.get_random_ip()

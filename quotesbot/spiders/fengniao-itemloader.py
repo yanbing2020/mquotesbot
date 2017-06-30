@@ -18,14 +18,7 @@ class FengNiao(scrapy.Spider):
     # http: // bbs.fengniao.com / forum / pic / slide_125_9652913_85470669.html
 
     def parse(self, response):
-        # url_oitems['url_item'] = response.xpath('.//div[@class="pic-box"]/img/@src').extract_first()
-        # url_items['pic_name'] = response.xpath('.//title/text()').extract_first()
         url_items = FengNiaoUrl()
-
-        # url_items['url_item'] = response.css('.pi
-        # c-box > img::attr(src)').extract_first()
-        # url_items['pic_name'] = response.css('title::text').extract_first()
-
         # 通过itemloader 加载item
         item_loader = FengNiaoItemLoader(item=FengNiaoUrl(), response=response)
         item_loader.add_css("url_item", ".pic-box > img::attr(src)")

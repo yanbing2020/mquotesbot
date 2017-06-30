@@ -59,6 +59,7 @@ ROBOTSTXT_OBEY = True
 # }
 DOWNLOADER_MIDDLEWARES = {
     'quotesbot.middlewares.middle.RandomUserAgentMiddleware': 543,
+    # 'quotesbot.middlewares.middle.RandomProxyMiddleware': 544,
     # 'quotesbot.middlewares.middle.ProcessHeaderMidware': 543,
     # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
