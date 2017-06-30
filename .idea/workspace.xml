@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aaffac83-43d3-459a-a2c9-762812b4c636" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/quotesbot/tools/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/quotesbot/middlewares/middle.py" afterPath="$PROJECT_DIR$/quotesbot/middlewares/middle.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,8 +58,8 @@
       <file leaf-file-name="crawler_xici_ip.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quotesbot/tools/crawler_xici_ip.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="21" column="64" lean-forward="true" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+            <state relative-caret-position="384">
+              <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
               <folding>
                 <element signature="e#34#49#0" expanded="true" />
                 <marker date="1498728996629" expanded="true" signature="1080:1096" ph="insert into proxy... " />
@@ -612,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498729201398</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="二次">
+      <created>1498782355019</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1498782355019</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -715,7 +720,8 @@
     <MESSAGE value="3.改用itemloader提取字段，以后可以配置&#10;&#10;4.改用pipline下载图片" />
     <MESSAGE value="Merge branch 'master' of https://github.com/yanbing2020/mquotesbot&#10;&#10;# Conflicts:&#10;#&#9;quotesbot/pipelines.py&#10;#&#9;quotesbot/settings.py" />
     <MESSAGE value="dsf" />
-    <option name="LAST_COMMIT_MESSAGE" value="dsf" />
+    <MESSAGE value="二次" />
+    <option name="LAST_COMMIT_MESSAGE" value="二次" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1091,8 +1097,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/quotesbot/tools/crawler_xici_ip.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="21" column="64" lean-forward="true" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+        <state relative-caret-position="384">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
           <folding>
             <element signature="e#34#49#0" expanded="true" />
             <marker date="1498728996629" expanded="true" signature="1080:1096" ph="insert into proxy... " />
